@@ -134,7 +134,7 @@ theme.cal = lain.widget.cal({
 
 
 -- Mail IMAP check
-local mailicon = wibox.widget.imagebox(theme.widget_mail)
+--local mailicon = wibox.widget.imagebox(theme.widget_mail)
 --[[ commented because it needs to be set before use
 mailicon:buttons(my_table.join(awful.button({ }, 1, function () awful.spawn(mail) end)))
 theme.mail = lain.widget.imap({
@@ -161,40 +161,40 @@ theme.volume = lain.widget.alsabar({
 })
 
 -- MPD
-local musicplr = "urxvt -title Music -g 130x34-320+16 -e ncmpcpp"
-local mpdicon = wibox.widget.imagebox(theme.widget_music)
-mpdicon:buttons(my_table.join(
-    awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
+--local musicplr = "urxvt -title Music -g 130x34-320+16 -e ncmpcpp"
+--local mpdicon = wibox.widget.imagebox(theme.widget_music)
+--mpdicon:buttons(my_table.join(
+--    awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
     --[[awful.button({ }, 1, function ()
         awful.spawn.with_shell("mpc prev")
         theme.mpd.update()
     end),
     --]]
-    awful.button({ }, 2, function ()
-        awful.spawn.with_shell("mpc toggle")
-        theme.mpd.update()
-    end),
-    awful.button({ modkey }, 3, function () awful.spawn.with_shell("pkill ncmpcpp") end),
-    awful.button({ }, 3, function ()
-        awful.spawn.with_shell("mpc stop")
-        theme.mpd.update()
-    end)))
-theme.mpd = lain.widget.mpd({
-    settings = function()
-        if mpd_now.state == "play" then
-            artist = " " .. mpd_now.artist .. " "
-            title  = mpd_now.title  .. " "
-            mpdicon:set_image(theme.widget_music_on)
-            widget:set_markup(markup.font(theme.font, markup("#FFFFFF", artist) .. " " .. title))
-        elseif mpd_now.state == "pause" then
-            widget:set_markup(markup.font(theme.font, " mpd paused "))
-            mpdicon:set_image(theme.widget_music_pause)
-        else
-            widget:set_text("")
-            mpdicon:set_image(theme.widget_music)
-        end
-    end
-})
+--    awful.button({ }, 2, function ()
+--        awful.spawn.with_shell("mpc toggle")
+--        theme.mpd.update()
+--    end),
+--    awful.button({ modkey }, 3, function () awful.spawn.with_shell("pkill ncmpcpp") end),
+--    awful.button({ }, 3, function ()
+--        awful.spawn.with_shell("mpc stop")
+--        theme.mpd.update()
+--    end)))
+--theme.mpd = lain.widget.mpd({
+--    settings = function()
+--        if mpd_now.state == "play" then
+--            artist = " " .. mpd_now.artist .. " "
+--            title  = mpd_now.title  .. " "
+--            mpdicon:set_image(theme.widget_music_on)
+--            widget:set_markup(markup.font(theme.font, markup("#FFFFFF", artist) .. " " .. title))
+--        elseif mpd_now.state == "pause" then
+--            widget:set_markup(markup.font(theme.font, " mpd paused "))
+--            mpdicon:set_image(theme.widget_music_pause)
+--        else
+--            widget:set_text("")
+--            mpdicon:set_image(theme.widget_music)
+--        end
+--    end
+--})
 
 -- MEM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
@@ -341,8 +341,6 @@ function theme.at_screen_connect(s)
    -- s.quake = lain.util.quake({ app = awful.util.terminal })
    s.quake = lain.util.quake({ app = "termite", height = 0.50, argname = "--name %s" })
 
-
-
     -- If wallpaper is a function, call it with the screen
     local wallpaper = theme.wallpaper
     if type(wallpaper) == "function" then
@@ -401,9 +399,9 @@ function theme.at_screen_connect(s)
             -- using separators
             --arrow(theme.bg_normal, "#343434"),
            -- wibox.container.background(wibox.container.margin(wibox.widget { mailicon, mail and mail.widget, layout = wibox.layout.align.horizontal }, 4, 7), "#343434"),
-            arrow("alpha", "#889FA7"),
-            wibox.container.background(wibox.container.margin(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, 3, 6), "#889FA7"),
-            arrow("#889FA7", "#497B96"),
+            --arrow("alpha", "#889FA7"),
+            --wibox.container.background(wibox.container.margin(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, 3, 6), "#889FA7"),
+            --arrow("#889FA7", "#497B96"),
             wibox.container.background(wibox.container.margin(wibox.widget { volicon, theme.volume.widget, layout = wibox.layout.align.horizontal }, 2, 3), "#497B96"),
             arrow("#497B96", "#777E76"),
             wibox.container.background(wibox.container.margin(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, 2, 3), "#777E76"),
@@ -413,11 +411,11 @@ function theme.at_screen_connect(s)
             wibox.container.background(wibox.container.margin(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, 4, 4), "#4B3B51"),
             arrow("#4B3B51", "#CB755B"),
             wibox.container.background(wibox.container.margin(wibox.widget { weathericon, theme.weather.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#CB755B"),
-            arrow("#CB755B", "#8DAA9A"),
-            wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#8DAA9A"),
-            arrow("#8DAA9A", "#20C0A2"),
-            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#20C0A2"),
-            arrow("#20C0A2", "#777E76"),
+            arrow("#CB755B", "#6D3A90"),
+            wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#6D3A90"),
+            arrow("#6D3A90", "#2040A2"),
+            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#2040A2"),
+            arrow("#2040A2", "#777E76"),
             wibox.container.background(wibox.container.margin(clock, 4, 8), "#777E76"),
             arrow("#777E76", "alpha"),
             --]]

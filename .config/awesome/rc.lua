@@ -43,8 +43,10 @@ local xrandr 	    = require("xrandr")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
                       require("awful.hotkeys_popup.keys")
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
--- }}}
 
+-- r.run for run once
+local r = require("runonce")
+-- }}}
 
 
 -- {{{ Error handling
@@ -73,7 +75,6 @@ end
 -- }}}
 
 
-
 -- {{{ Autostart windowless processes
 local function run_once(cmd_arr)
     for _, cmd in ipairs(cmd_arr) do
@@ -88,14 +89,12 @@ run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- {{{ Variable definitions
 
 local themes = {
-    "powerarrow-blue", -- 1
+    "multicolor",      -- 1
     "powerarrow",      -- 2
-    "multicolor",      -- 3
-
 }
 
 -- choose your theme here
-local chosen_theme = themes[2]
+local chosen_theme = themes[1]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -109,7 +108,7 @@ local shiftkey     = "Shift"
 -- personal variables
 --change these variables if you want
 local browser           = "firefox"
-local editor            = os.getenv("EDITOR") or "vim"
+local editor            = "micro" or os.getenv("EDITOR") or "vim"
 local editorgui         = "subl"
 local filemanager       = "nautilus"
 local mediaplayer       = "vlc"
@@ -117,9 +116,26 @@ local scrlocker         = "slimlock"
 local terminal          = "terminator"
 local virtualmachine    = "virtualbox"
 
+
+-- Autostart applications
+--awful.spawn.with_shell("nitrogen --restore")
+--awful.spawn.with_shell("picom --config  $HOME/.config/picom/picom.conf")
+--awful.spawn.with_shell("compton")
+--awful.spawn.with_shell("nm-applet")
+--awful.spawn.with_shell("volumeicon")
+awful.spawn.with_shell("xscreensaver -no-splash")
+r.run("nitrogen --restore")
+r.run("compton")
+r.run("volumeicon")
+r.run("nm-applet")
+r.run("clipit")
+r.run("gnome-keyring-daemon --start -c pkcs11 &")
+r.run("eval $(gpg-agent --daemon) &")
+
 -- awesome variables
 awful.util.terminal = terminal
-awful.util.tagnames = {  " ", " ", " ", " ", " ", " ", " ", " ", " ", " "  }
+awful.util.tagnames = {  " ", " ", " ", " ", " " }
+--awful.util.tagnames = {  " ", " ", " ", " ", " ", " ", " ", " ", " ", " "  }
 --awful.util.tagnames = { " DEV ", " WWW ", " SYS ", " DOC ", " VBOX ", " CHAT ", " MUS ", " VID ", " GFX " }
 awful.layout.suit.tile.left.mirror = true
 awful.layout.layouts = {
@@ -207,7 +223,8 @@ beautiful.init(string.format(gears.filesystem.get_configuration_dir() .. "/theme
 local myawesomemenu = {
     { "hotkeys", function() return false, hotkeys_popup.show_help end },
     { "manual", terminal .. " -e 'man awesome'" },
-    { "edit config", terminal.." vim /home/rsrini/.config/awesome/rc.lua" },
+    { "edit config", "subl /home/rsrini/.config/awesome/rc.lua" },
+    --{ "edit config", terminal .." micro /home/rsrini/.config/awesome/rc.lua" },
     { "arandr", "arandr" },
     { "restart", awesome.restart },
 }
@@ -221,6 +238,7 @@ awful.util.mymainmenu = freedesktop.menu.build({
     },
     after = {
         { "Terminal", terminal },
+        { "Lock" , "xscreensaver-command -lock" },
         { "Log out", function() awesome.quit() end },
         { "Sleep", "systemctl suspend" },
         { "Restart", "systemctl reboot" },
@@ -785,6 +803,9 @@ awful.rules.rules = {
     { rule = { class = "VirtualBox Machine" },
           properties = { maximized = true } },
 
+    { rule = { class = "terminator" },
+          properties = { opacity = 0.90 } },
+
 
     -- Floating clients.
     { rule_any = {
@@ -890,9 +911,9 @@ client.connect_signal("request::titlebars", function(c)
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = true})
-end)
+--client.connect_signal("mouse::enter", function(c)
+--    c:emit_signal("request::activate", "mouse_enter", {raise = true})
+-- end)
 
 -- No border for maximized clients
 function border_adjust(c)
@@ -911,9 +932,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- }}}
 
--- Autostart applications
-awful.spawn.with_shell("nitrogen --restore")
---awful.spawn.with_shell("picom --config  $HOME/.config/picom/picom.conf")
-awful.spawn.with_shell("compton")
-awful.spawn.with_shell("nm-applet")
-awful.spawn.with_shell("volumeicon")
+
