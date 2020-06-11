@@ -123,7 +123,7 @@ local virtualmachine    = "virtualbox"
 --awful.spawn.with_shell("compton")
 --awful.spawn.with_shell("nm-applet")
 --awful.spawn.with_shell("volumeicon")
-awful.spawn.with_shell("xscreensaver -no-splash")
+--awful.spawn.with_shell("xscreensaver -no-splash")
 r.run("nitrogen --restore")
 r.run("compton")
 r.run("volumeicon")
@@ -238,7 +238,7 @@ awful.util.mymainmenu = freedesktop.menu.build({
     },
     after = {
         { "Terminal", terminal },
-        { "Lock" , "xscreensaver-command -lock" },
+        --{ "Lock" , "xscreensaver-command -lock" },
         { "Log out", function() awesome.quit() end },
         { "Sleep", "systemctl suspend" },
         { "Restart", "systemctl reboot" },
