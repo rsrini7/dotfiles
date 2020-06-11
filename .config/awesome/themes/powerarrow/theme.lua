@@ -239,7 +239,7 @@ Copy/paste the city code in the URL to this file in city_id
 --]]
 local weathericon = wibox.widget.imagebox(theme.widget_weather)
 theme.weather = lain.widget.weather({
-    city_id = 2803138, -- placeholder (Belgium)
+    city_id = 1277333, -- placeholder (Belgium)
     notification_preset = { font = "Noto Sans Mono Medium 10", fg = theme.fg_normal },
     weather_na_markup = markup.fontfg(theme.font, "#ffffff", "N/A "),
     settings = function()
@@ -415,9 +415,9 @@ function theme.at_screen_connect(s)
             wibox.container.background(wibox.container.margin(wibox.widget { weathericon, theme.weather.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#CB755B"),
             arrow("#CB755B", "#8DAA9A"),
             wibox.container.background(wibox.container.margin(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#8DAA9A"),
-            arrow("#8DAA9A", "#C0C0A2"),
-            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#C0C0A2"),
-            arrow("#C0C0A2", "#777E76"),
+            arrow("#8DAA9A", "#20C0A2"),
+            wibox.container.background(wibox.container.margin(wibox.widget { nil, neticon, net.widget, layout = wibox.layout.align.horizontal }, 3, 3), "#20C0A2"),
+            arrow("#20C0A2", "#777E76"),
             wibox.container.background(wibox.container.margin(clock, 4, 8), "#777E76"),
             arrow("#777E76", "alpha"),
             --]]

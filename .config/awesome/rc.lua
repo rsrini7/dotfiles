@@ -35,6 +35,9 @@ local lain          = require("lain")
 local freedesktop   = require("freedesktop")
 local xrandr 	    = require("xrandr")
 
+--require("awful.remote")
+--require("screenful")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 local hotkeys_popup = require("awful.hotkeys_popup").widget
@@ -92,7 +95,7 @@ local themes = {
 }
 
 -- choose your theme here
-local chosen_theme = themes[3]
+local chosen_theme = themes[2]
 
 local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme)
 beautiful.init(theme_path)
@@ -101,18 +104,16 @@ beautiful.init(theme_path)
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local modkey1      = "Control"
+local shiftkey     = "Shift"
 
 -- personal variables
 --change these variables if you want
 local browser           = "firefox"
 local editor            = os.getenv("EDITOR") or "vim"
-local editorgui         = "geany"
-local gui_editor		= "gedit"
+local editorgui         = "subl"
 local filemanager       = "nautilus"
-local mailclient        = "geary"
 local mediaplayer       = "vlc"
 local scrlocker         = "slimlock"
---local terminal          = "alacritty"
 local terminal          = "terminator"
 local virtualmachine    = "virtualbox"
 
@@ -206,7 +207,7 @@ beautiful.init(string.format(gears.filesystem.get_configuration_dir() .. "/theme
 local myawesomemenu = {
     { "hotkeys", function() return false, hotkeys_popup.show_help end },
     { "manual", terminal .. " -e 'man awesome'" },
-    { "edit config", terminal.." vim /home/dt/.config/awesome/rc.lua" },
+    { "edit config", terminal.." vim /home/rsrini/.config/awesome/rc.lua" },
     { "arandr", "arandr" },
     { "restart", awesome.restart },
 }
@@ -280,7 +281,7 @@ globalkeys = my_table.join(
 	-- Applications (Super+Key)
     awful.key({ modkey }, "b", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
-    awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
+    awful.key({ modkey }, "a", function () awful.spawn(editorgui) end,
               {description = "run gui editor", group = "launcher"}),
 	awful.key({ modkey }, "e", function () awful.spawn(filemanager) end,
               {description = "run filemanager", group = "launcher"}),              
@@ -783,10 +784,6 @@ awful.rules.rules = {
 
     { rule = { class = "VirtualBox Machine" },
           properties = { maximized = true } },
-
-    { rule = { class = "Xfce4-settings-manager" },
-          properties = { floating = false } },
-
 
 
     -- Floating clients.
