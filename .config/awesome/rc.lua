@@ -7,6 +7,14 @@
  
  My awesome window manager configuration. Provided here for those that want to examine or use
  my config in part or in whole. Take what works for you; leave the rest!
+
+ Srinivasan Ragothaman
+ Modified Version to support
+ * brightness control: https://github.com/haikarainen/light
+ * multi monitor using shortcut
+ * Bangalore weather widget
+ * custom one-time execute (runonce) lua script
+ * screenshots using gnome-screenshots
  
 --]]
 
@@ -216,8 +224,6 @@ lain.layout.cascade.tile.ncol          = 2
 
 beautiful.init(string.format(gears.filesystem.get_configuration_dir() .. "/themes/%s/theme.lua", chosen_theme))
 -- }}}
-
-
 
 -- {{{ Menu
 local myawesomemenu = {
@@ -565,9 +571,9 @@ globalkeys = my_table.join(
               {description = "show weather", group = "widgets"}),
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
+    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("light -A 5") end,
               {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("light -U 5") end,
               {description = "-10%", group = "hotkeys"}),
 
     -- ALSA volume control
