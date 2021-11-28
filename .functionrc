@@ -1,0 +1,56 @@
+ex ()
+{
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+
+gitpush() {
+    git add .
+    git commit -m "$*"
+    git pull
+    git push
+}
+
+
+function cleanCache(){
+    
+    find ~/.cache -depth -type f -mtime +100 -delete
+
+    # Vacuum journals
+    sudo journalctl --vacuum-size=500M && sudo journalctl --vacuum-time=7d
+
+    # Remove all uninstalled packages
+    sudo paccache -rvuk0
+
+    # Remove old installed packages, leave 1
+    sudo paccache -rvk1
+
+    # Clean yay cache
+    yay -Sc -a
+
+    # Clean pamac build cache
+    pamac clean -bv
+
+    # Clean temporary build files
+    rm -rf ~/{.cargo,.cmake,.electron,.electron-gyp,.npm,.nvm,.racket,.stack,.yarn} || true
+    rm -rf ~/.cache/{electron,electron-builder,go-build,node-gyp,pip,yarn} || true
+    #sudo rm -rf ~/go || true #todo check
+
+}
