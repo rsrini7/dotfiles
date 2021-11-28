@@ -120,13 +120,10 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/bashhistory
 
+where() { type -a "$@" ; }
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 source /usr/share/autojump/autojump.bash 2>/dev/null
-
-where() { type -a "$@" ; }
-alias condabash="source /opt/miniconda3/etc/profile.d/conda.sh && conda activate py39"
-
 
 source $HOME/.functionrc
 source $HOME/.aliasrc

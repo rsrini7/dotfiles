@@ -29,7 +29,7 @@ gitpush() {
 }
 
 
-function cleanCache(){
+function cleanCacheArch(){
     
     find ~/.cache -depth -type f -mtime +100 -delete
 

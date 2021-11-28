@@ -13,9 +13,12 @@ source $ZSH/oh-my-zsh.sh
 autoload -U +X compinit && compinit
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
+
 source $HOME/.commonrc
 source $HOME/.functionrc
 source $HOME/.aliasrc
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
