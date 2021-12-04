@@ -5,15 +5,15 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 export ZSH="/home/srini/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git zsh-completions zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-z)
 source $ZSH/oh-my-zsh.sh
 
 autoload -U +X compinit && compinit
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-
+#[ -s "/usr/share/fzf/key-bindings.zsh" ] && source "/usr/share/fzf/key-bindings.zsh"
+#[ -s "/usr/share/fzf/completion.zsh" ] && source "/usr/share/fzf/completion.zsh"
 
 source $HOME/.commonrc
 source $HOME/.functionrc
@@ -22,3 +22,8 @@ source $HOME/.aliasrc
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

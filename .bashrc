@@ -121,11 +121,19 @@ SAVEHIST=10000
 HISTFILE=~/.cache/bashhistory
 
 where() { type -a "$@" ; }
-source /usr/share/fzf/key-bindings.bash
-source /usr/share/fzf/completion.bash
-source /usr/share/autojump/autojump.bash 2>/dev/null
+#[ -s "/usr/share/fzf/key-bindings.bash" ] && source "/usr/share/fzf/key-bindings.bash"
+#[ -s "/usr/share/fzf/completion.bash" ] && source "/usr/share/fzf/completion.bash"
+[ -s "/usr/share/autojump/autojump.bash" ] && source "/usr/share/autojump/autojump.bash" 2>/dev/null
 
 source $HOME/.functionrc
 source $HOME/.aliasrc
 
 [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"
+
+if command -v theme.sh > /dev/null; then
+	bind -x '"\x0f":"theme.sh $(theme.sh -l|tail -n2|head -n1)"' #Binds C-o to the previously active theme.
+fi
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"

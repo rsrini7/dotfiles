@@ -49,8 +49,8 @@ function cleanCacheArch(){
     pamac clean -bv
 
     # Clean temporary build files
-    rm -rf ~/{.cargo,.cmake,.electron,.electron-gyp,.npm,.nvm,.racket,.stack,.yarn} || true
-    rm -rf ~/.cache/{electron,electron-builder,go-build,node-gyp,pip,yarn} || true
+    #rm -rf ~/{.cargo,.cmake,.electron,.electron-gyp,.npm,.nvm,.racket,.stack,.yarn} || true
+    #rm -rf ~/.cache/{electron,electron-builder,go-build,node-gyp,pip,yarn} || true
     #sudo rm -rf ~/go || true #todo check
 
 }

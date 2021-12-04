@@ -1,5 +1,3 @@
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-. /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
-eval $(thefuck --alias)
+

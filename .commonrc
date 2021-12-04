@@ -1,7 +1,26 @@
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+source /home/linuxbrew/.linuxbrew/opt/asdf/libexec/asdf.sh
 
 export EDITOR=micro
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/bin
+export PATH=$PATH:$HOME/.cargo/bin:$HOME/bin:$HOME/miniconda/bin
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"
+
+eval $(thefuck --alias)
+
+if command -v theme.sh > /dev/null; then
+	[ -e ~/.theme_history ] && theme.sh "$(theme.sh -l|tail -n1)"
+
+	# Optional  
+
+	alias th='theme.sh -i'
+
+	# Interactively load a light theme
+	alias thl='theme.sh --light -i'
+
+	# Interactively load a dark theme
+	alias thd='theme.sh --dark -i'
+fi
 

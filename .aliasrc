@@ -1,7 +1,8 @@
-alias condash="source /opt/miniconda3/etc/profile.d/conda.sh && conda activate py39"
+
+alias brewchown="sudo chown -R $(whoami) $(brew --prefix)/*"
+alias condash="source $HOME/miniconda/etc/profile.d/conda.sh && conda activate base"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-alias condazsh="source /opt/miniconda3/etc/profile.d/conda.sh && conda activate py39"
 alias a24="pacmd set-card-profile 0 output:hdmi-stereo-extra2+input:analog-stereo"
 alias a29="pacmd set-card-profile 0 output:hdmi-stereo-extra1+input:analog-stereo"
 alias aspkr="pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo"
@@ -32,3 +33,4 @@ alias unexport='unset'
 
 alias weather='curl -s wttr.in | sed -n "1,7p"'
 
+alias btop='btop --utf-force'
