@@ -1,5 +1,5 @@
 
-alias brewchown="sudo chown -R $(whoami) $(brew --prefix)/*"
+
 alias condash="source $HOME/miniconda/etc/profile.d/conda.sh && conda activate base"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'

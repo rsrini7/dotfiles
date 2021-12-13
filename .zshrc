@@ -15,6 +15,7 @@ autoload -U +X compinit && compinit
 #[ -s "/usr/share/fzf/key-bindings.zsh" ] && source "/usr/share/fzf/key-bindings.zsh"
 #[ -s "/usr/share/fzf/completion.zsh" ] && source "/usr/share/fzf/completion.zsh"
 
+
 source $HOME/.commonrc
 source $HOME/.functionrc
 source $HOME/.aliasrc
@@ -27,3 +28,4 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

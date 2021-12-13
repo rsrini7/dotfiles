@@ -54,3 +54,43 @@ function cleanCacheArch(){
     #sudo rm -rf ~/go || true #todo check
 
 }
+
+function brew_add_to_path() {
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"    
+    [ -s "/home/linuxbrew/.linuxbrew/bin/thefuck" ] && eval $(thefuck --alias)
+
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"
+    
+
+    if [[ $SHELL == *"bash"* ]]; then
+        [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"
+    else
+       echo "conditional zsh here"
+    fi
+
+    alias brewchown="sudo chown -R $(whoami) $(brew --prefix)/*"
+}
+
+
+
+function brew_remove_from_path_bash {
+    
+    PATH=${PATH/"/home/srini/.asdf/shims:"/""}
+    PATH=${PATH/"/home/linuxbrew/.linuxbrew/opt/asdf/libexec/bin:"/""}
+    PATH=${PATH/"/home/linuxbrew/.linuxbrew/bin:"/""}
+    PATH=${PATH/"/home/linuxbrew/.linuxbrew/sbin:"/""}
+    #PATH=${PATH/"/home/linuxbrew/.linuxbrew/opt/fzf/bin:"/""}
+    
+}
+
+function brew_remove_from_path_zsh {
+    
+    PATH=${PATH/"\/home\/srini\/.asdf\/shims:"/""}
+    PATH=${PATH/"\/home\/linuxbrew\/.linuxbrew\/opt\/asdf\/libexec\/bin:"/""}
+    PATH=${PATH/"\/home\/linuxbrew\/.linuxbrew\/bin:"/""}
+    PATH=${PATH/"\/home\/linuxbrew\/.linuxbrew\/sbin:"/""}
+    #PATH=${PATH/"\/home\/linuxbrew\/.linuxbrew\/opt\/fzf\/bin:"/""}
+    
+}
+

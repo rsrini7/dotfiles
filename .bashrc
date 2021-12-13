@@ -112,9 +112,6 @@ shopt -s expand_aliases
 
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
-
-source $HOME/.commonrc
-
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
@@ -125,6 +122,7 @@ where() { type -a "$@" ; }
 #[ -s "/usr/share/fzf/completion.bash" ] && source "/usr/share/fzf/completion.bash"
 [ -s "/usr/share/autojump/autojump.bash" ] && source "/usr/share/autojump/autojump.bash" 2>/dev/null
 
+source $HOME/.commonrc
 source $HOME/.functionrc
 source $HOME/.aliasrc
 
@@ -137,3 +135,4 @@ fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 . "$HOME/.cargo/env"
+
