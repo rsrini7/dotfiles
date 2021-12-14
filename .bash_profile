@@ -5,4 +5,4 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 source $HOME/.common_profile
 
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
