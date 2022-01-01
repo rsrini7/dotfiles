@@ -76,7 +76,7 @@ function brew_add_to_path() {
 
 function brew_remove_from_path_bash {
     
-    PATH=${PATH/"/home/srini/.asdf/shims:"/""}
+    #PATH=${PATH/"$HOME/.asdf/shims:"/""}
     PATH=${PATH/"/home/linuxbrew/.linuxbrew/opt/asdf/libexec/bin:"/""}
     PATH=${PATH/"/home/linuxbrew/.linuxbrew/bin:"/""}
     PATH=${PATH/"/home/linuxbrew/.linuxbrew/sbin:"/""}
@@ -94,3 +94,106 @@ function brew_remove_from_path_zsh {
     
 }
 
+# Repeat a command N times.  You can do something like
+#  repeat 3 echo 'hi'
+function repeat()
+{
+    local i max
+    max=$1; shift;
+    for ((i=1; i <= max ; i++)); do
+        eval "$@";
+    done
+}
+
+mdcd () {
+    mkdir -p $1
+    cd $1
+}
+
+zipf () { zip -r "$1".zip "$1" ; }          # zipf:         To create a ZIP archive of a folder
+cdll() { builtin cd "$@"; ll; }         # Always list directory contents upon 'cd'
+
+
+ff () { /usr/bin/find . -name "$@" ; }       # ff:       Find file under the current directory
+ffs () { /usr/bin/find . -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
+ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
+
+#   ii:  display useful host related informaton
+#   -------------------------------------------------------------------
+    ii() {
+        echo -e "\nYou are logged on ${RED}$HOST"
+        echo -e "\nAdditionnal information:$NC " ; uname -a
+        echo -e "\n${RED}Users logged on:$NC " ; w -h
+        echo -e "\n${RED}Current date :$NC " ; date
+        echo -e "\n${RED}Machine stats :$NC " ; uptime
+        echo -e "\n${RED}Current network location :$NC " ; scselect
+        #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
+        echo
+    }
+
+# Generates a tree view from the current directory
+function treepwd(){
+    pwd
+    ls -R | grep ":$" |   \
+    sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+}
+
+#  GIT stuff
+
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+#   ---------------------------
+#   5.  GIT PROMPT
+#   ---------------------------
+
+# If we're in a git repo, print the first 9 characters of the current committish.
+function parse_git_commit() {
+    git rev-parse HEAD 2>/dev/null | cut -c1-10
+}
+
+# If we're in a git repo, print the current branch name.  The sed call deletes
+# any line not starting with '* ', then removes the '* '
+function parse_git_branch () {
+    git rev-parse --abbrev-ref HEAD 2>/dev/null
+}
+
+# If we're in a git repo, print "@(<branchname>:<committish>)"
+function current_git_info (){
+    branch=`parse_git_branch`
+    commit=`parse_git_commit`
+
+    # If branch is not empty
+    if [ ! -z "$branch" ]
+    then
+        echo "@($branch:$commit)";
+    fi
+}
+
+# cd follows aliases
+function cdfa {
+    if [ ${#1} == 0 ]; then
+        builtin cd
+    elif [ -d "${1}" ]; then
+        builtin cd "${1}"
+    elif [[ -f "${1}" || -L "${1}" ]]; then
+        path=$(getTrueName "$1")
+        builtin cd "$path"
+    else
+        builtin cd "${1}"
+    fi
+}
+
+# do sudo, or sudo the last command if no argument given
+s() {
+    if [[ $# == 0 ]]; then
+        sudo $(history -p '!!')
+    else
+        sudo "$@"
+    fi
+}
+
+function watcha {
+    watch $(alias "$@" | cut -d\' -f2)
+}

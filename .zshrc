@@ -8,7 +8,7 @@ fi
 
 export ZSH="/home/srini/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git zsh-completions zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-z)
+plugins=(git zsh-completions zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-z zsh-dircolors-solarized)
 source $ZSH/oh-my-zsh.sh
 
 autoload -U +X compinit && compinit
